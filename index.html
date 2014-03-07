@@ -2,13 +2,25 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>
-      jQuery.getJSON demo
-    </title>
+    <title>Native Plants of the Chesapeake Bay</title>
     <style>
-      img {
-        height: 100px;
-        float: left;
+      .div-table{
+        display:table;         
+        width:100%;         
+        background-color:#eee;         
+        border:1px solid  #666666;         
+        border-spacing:5px;/*cellspacing:poor IE support for  this*/
+      }
+      .div-table-row{
+        display:table-row;
+        width:auto;
+        clear:both;
+        border:1px solid  #000000;
+        width:100%;    
+      }
+      .div-table-cell{
+        border:1px solid  #000000;
+        float:left;
       }
     </style>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -22,8 +34,8 @@
         <input type="submit" class="button">
     </form>
   
-  
-    <div id="mydiv">
+    <div id="mydiv" class="div-table">
+    
     </div>
     
   </body>

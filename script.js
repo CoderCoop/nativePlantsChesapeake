@@ -10,14 +10,51 @@ $(document).ready(function () {
             //    format: "json"
         })
             .done(function (data) {
+            
+                var mydata = new Array();
+                
                 $.each(data.query.results.div, function (i, div) {
-                        console.log(div.div[0].a.href);
-                        console.log(div.div[0].a.img.src);
-                        console.log(div.div[1].a.content);
-                        console.log(div.div[2].p);
-                        // html += "<div>"+div.class+"</div>";     
-                    }
-                    //$('#mydiv').append(html);
+                
+                  //n++;
+                
+                  var entry = new Array();
+                
+                  entry["url"]=div.div[0].a.href; //plant url
+                  entry["img"]=div.div[0].a.img.src; //thumbnail image
+                  entry["term"]=div.div[1].a.content; //scientific name
+                  entry["name"]=div.div[2].p; //common name  
+                  
+                  plantid = "plant"+entry["url"].split("/").pop(); 
+
+                  
+                  mydata.push(entry);
+                  
+                  
+                  $celldiv = $('<div>', {class:'div-table-cell'});
+                  
+                  $( "<img>" ).attr( "src", entry["img"] ).prependTo( $celldiv ); //add thumbnail image
+                  
+                  $namediv = $('<div>', {class:'div-table-cell',text:entry["name"]});
+                  
+                  
+                  
+                  $rowdiv = $('<div>', {class:'div-table-row'});
+                  
+                  
+                  $rowdiv.append($celldiv);
+                  $rowdiv.append($namediv);
+                             
+//                  $rowdiv.appendTo( "#mydiv" );
+                  
+                  $('#mydiv').append($rowdiv);
+                  
+                  
+                  
+                  
+                }
+                    
+                
+                
                 );
             });
     });
