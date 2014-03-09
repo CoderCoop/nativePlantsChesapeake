@@ -2,6 +2,8 @@ package net.nativeplantcenter.android;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.webkit.WebView;
+import android.webkit.WebSettings;
 
 public class nativePlantsChesapeake extends Activity
 {
@@ -11,5 +13,9 @@ public class nativePlantsChesapeake extends Activity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        WebView myWebView = (WebView) findViewById(R.id.webview);
+        WebSettings webSettings = myWebView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        myWebView.loadUrl("file:///android_asset/index.html");
     }
 }
