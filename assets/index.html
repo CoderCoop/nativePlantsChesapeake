@@ -4,39 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Native Plants of the Chesapeake Bay</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css">
     <style>
-      .div-table{
-        display:table;         
-        width:100%;         
-        background-color:#eee;         
-        border:1px solid  #666666;         
-        border-spacing:5px;/*cellspacing:poor IE support for  this*/
+    .ui-listview h3 {
+      white-space:normal !important;
+    }
+    
+      .ui-li-has-thumb a {
+        min-height:103px !important;
+        padding-left: 145px !important;
       }
-      .div-table-row{
-        display:table-row;
-        width:auto;
-        clear:both;
-        border:1px solid  #000000;
-        width:100%;    
+      
+      .ui-li-has-thumb img {
+        max-height: 128px !important;
+        max-width: 128px !important;
+        box-shadow: 0 0 5px #808080;
       }
-      .div-table-cell{
-      /*  border:1px dotted  #000000; */
-        float:left;
-        margin: 0.25em;
-      }
-      .div-title {
-        font-size:large;
-        padding: 0 0 0 0.25em;
-      }
-      .div-image {
-        height:128px;
-        width:128px;
-        
-      }
-      img.thumbnail {
-        border-radius:10px;
-        border:1px solid #000000;
-      }
+      
+      
       
     </style>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -45,16 +30,21 @@
     <script src="script.js"></script>
   </head>
   <body>
-  
-  
-  <form action="">
-        <input type="text" name="query" id="query">
-        <input type="submit" class="button">
-    </form>
-  
-    <div id="mydiv" class="div-table">
     
+<div data-role="page" id="pageone">
+  <div data-role="main" class="ui-content">
+
+      <form action="">
+        <input type="text" name="query" id="query" placeholder="Search for plants">
+        <input type="submit" class="ui-btn ui-btn-inline" value="Search">
+      </form>
+      
+      
+    
+    
+    <ul data-role="listview" data-inset="true" id="mylist"></ul>
     </div>
-    
+    </div>
+      
   </body>
 </html>
