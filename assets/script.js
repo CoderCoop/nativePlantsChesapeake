@@ -33,6 +33,10 @@ $(document).ready(function () {
  
             mydata.push(entry);
             
+            
+            $rowdiv = $('<div>', {class:'div-table-row'}); //create div for row
+            
+            
             //create div for thumbnail
             $imagediv = $('<div>', {class:'div-table-cell div'}); 
             $( "<img>", {class:'thumbnail'}).attr( "src", entry["img"] ).prependTo( $imagediv );
@@ -40,7 +44,6 @@ $(document).ready(function () {
             
             // create div with name
             $namediv = $('<div>', {class:'div-table-cell div-title',text:entry["name"]}); 
-            $rowdiv = $('<div>', {class:'div-table-row'}); //create div for row
             $rowdiv.append($namediv);
                       
             // append row to main div
