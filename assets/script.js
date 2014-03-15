@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+// search form
   $("form").on("submit", function (e) {
         e.preventDefault(); // supress form submit
         
@@ -22,7 +24,7 @@ $(document).ready(function () {
           
           $.each(data.query.results.div, function (i, div) {
           
-          console.log(div);
+          //console.log(div);
           
             var entry = new Array();
           
@@ -47,7 +49,7 @@ $(document).ready(function () {
             $listitem = $('<li>'); 
             
             //create link
-            $itemlink = $('<a>').attr("href","#"+plantid); 
+            $itemlink = $('<a>').attr({"href":"#"+plantid,"class":"search-result"}); 
             
             //create thumbnail
             $( "<img>").attr( "src", entry["img"] ).appendTo( $itemlink );
@@ -72,4 +74,12 @@ $(document).ready(function () {
       });
     });
   });
+
+  $(document).on('click', 'a.search-result', function() {
+    alert("clicked on: " + $(this).attr('href'));
+    
+  });
+  
+  
+  
 });

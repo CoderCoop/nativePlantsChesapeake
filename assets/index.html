@@ -6,6 +6,16 @@
     <title>Native Plants of the Chesapeake Bay</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css">
     <style>
+    div.ui-btn {
+      height:50px;
+      width:50px;
+    }
+    
+    div.ui-input-text input {
+      height:50px;
+      font-size:1.5em;
+    }
+    
     .ui-listview h3 {
       white-space:normal !important;
     }
@@ -21,8 +31,6 @@
         box-shadow: 0 0 5px #808080;
       }
       
-      
-      
     </style>
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
@@ -30,21 +38,36 @@
     <script src="script.js"></script>
   </head>
   <body>
-    
-<div data-role="page" id="pageone">
-  <div data-role="main" class="ui-content">
+      
+  <div data-role="page" id="pageone">
+    <div data-role="main" class="ui-content">
 
       <form action="">
-        <input type="text" name="query" id="query" placeholder="Search for plants">
-        <input type="submit" class="ui-btn ui-btn-inline" value="Search">
+        <fieldset class="ui-grid-a" style="width:100%;">
+          <div class="ui-block-a" style="width:calc(100% - 5em);">
+            <input type="text" name="query" id="query" placeholder="Search for plants"  data-inline="true">
+          </div>
+          <div class="ui-block-b" style="width:5em;right:0px;position:absolute;">
+            <input type="submit" data-role="button" data-icon="search" data-iconpos="notext" >
+          </div>
+        </fieldset>
       </form>
       
+      <ul data-role="listview" data-inset="true" id="mylist"></ul>
       
+      </div>
+      
+      <a href="#pagetwo">Goto page 2</a>
+    </div>
     
     
-    <ul data-role="listview" data-inset="true" id="mylist"></ul>
-    </div>
-    </div>
+    <div data-role="page" id="pagetwo">
+      <a href="#pageone">Back to search</a>
       
+      <div data-role="main" class="ui-content">
+        <div id="entrylarge"></div>
+      </div>
+    </div>
+     
   </body>
 </html>
