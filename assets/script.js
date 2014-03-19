@@ -91,15 +91,17 @@ $(document).ready(function () {
   $(document).on('click', 'a.search-result', function() {
   
     $('#entry-detail').empty(); // clear old results
-    $('#myPopup').empty(); // clear old results
+    
+    //remove old popup divs
+    $('.ui-popup-container').remove(); 
+    $('.ui-popup-screen').remove(); 
+    
   
     var myplant = $(this).attr('id'); //current plant id
+ 
+    $('#entry-detail').append($('<h3>').text(mydata[myplant].name)); // display plant name
     
-    console.log(myplant);
-    
-    $('#entry-detail').append($('<h3>').text(mydata[myplant].name));
-    
-    // create image popup link
+    // create popup link
     $imagelink= $('<a>').attr({
       "href":"#myPopup"+myplant,
       "data-rel":"popup",
@@ -112,7 +114,7 @@ $(document).ready(function () {
       "class":"bigimage"
     }));
     
-    // popup link
+    // add image and link to trigger popup
     $('#entry-detail').append($imagelink);
     
     // create div to hold popup image
@@ -122,24 +124,25 @@ $(document).ready(function () {
       "class":"photopopup",
     });
     
+    // add popup image to div
     $popupdiv.append($('<img>').attr({
       "src": mydata[myplant].img,
-    
     }));
     
+    // add the popup div
     $('#entry-detail').append($popupdiv);
     
-    // call popup function
+    // call popup function because dom has been modified
     $( "#myPopup"+myplant ).popup();
 
   });
-  
+
+// popup image scaling http://demos.jquerymobile.com/1.4.0/popup-image-scaling/  
   $( document ).on( "pagecreate", function() {
-     // console.log("foo");
       $( ".photopopup" ).on({
           popupbeforeposition: function() {
               var maxHeight = $( window ).height() - 60 + "px";
-              $( ".photopopup img" ).css( "max-height", maxHeight );
+              $( ".photopopup img" ).css( "height", maxHeight );
           }
       });
   });
