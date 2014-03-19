@@ -1,20 +1,29 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" debug="false">
   <head>
+ <!-- <script src="https://getfirebug.com/firebug-lite.js" type="text/javascript"></script> -->
+  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Native Plants of the Chesapeake Bay</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.css">
     <style>
     div.ui-btn {
-      height:50px;
-      width:50px;
+      height:3.25em;
+      width:4em;
     }
     
-    div.ui-input-text input {
-      height:50px;
+    div.ui-input-search input {
+
       font-size:1.5em;
+      
+    
     }
+    div.ui-input-search {
+      margin-left:0.5em !important;
+      
+    }
+    
     
     .ui-listview h3 {
       white-space:normal !important;
@@ -31,43 +40,85 @@
         box-shadow: 0 0 5px #808080;
       }
       
+     img.bigimage {
+       max-width:50%;
+       padding-left: 1em;
+       padding-right: 1em;
+       margin-left: auto;
+       margin-right: auto;
+       display:block;
+     
+     }
+     
+     div.ui-popup {
+    /*   max-width:80%;
+       max-height:80%;
+     */
+     }
+      
     </style>
+
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.4.1/jquery.mobile-1.4.1.min.js"></script>
 
     <script src="script.js"></script>
+    
   </head>
   <body>
       
-  <div data-role="page" id="pageone">
+  <div data-role="page" id="search-page">
+  
+    <div data-role="header">
+    
+        <form action="">
+          <fieldset class="ui-grid-a" style="width:100%;">
+            <div class="ui-block-a" style="width:calc(100% - 5em);">
+              <input type="search" name="query" id="query" placeholder="Search for plants"  data-inline="true">
+            </div>
+            <div class="ui-block-b" style="width:5em;right:0px;position:absolute;">
+              <input type="submit" data-role="button" data-icon="search" data-iconpos="notext" style="height:100%;" >
+            </div>
+          </fieldset>
+        </form>
+    </div>
+    
     <div data-role="main" class="ui-content">
 
-      <form action="">
-        <fieldset class="ui-grid-a" style="width:100%;">
-          <div class="ui-block-a" style="width:calc(100% - 5em);">
-            <input type="text" name="query" id="query" placeholder="Search for plants"  data-inline="true">
-          </div>
-          <div class="ui-block-b" style="width:5em;right:0px;position:absolute;">
-            <input type="submit" data-role="button" data-icon="search" data-iconpos="notext" >
-          </div>
-        </fieldset>
-      </form>
       
       <ul data-role="listview" data-inset="true" id="mylist"></ul>
       
       </div>
       
-      <a href="#pagetwo">Goto page 2</a>
+      <div data-role="footer">
+       <h1>All data from <a href="http://www.nativeplantcenter.net/">Native Plant Center</a></h1>
+     </div>
+      
     </div>
     
     
-    <div data-role="page" id="pagetwo">
-      <a href="#pageone">Back to search</a>
+    <div data-role="page" id="details-page">
+      <div data-role="header">
+        <div data-role="navbar">
+        <ul>
+        <li>
+        <a href="#search-page" data-transition="slide" data-direction="reverse" data-role="button" data-icon="back" >Back to search results</a>
+        </li>
+        </ul>
+        </div>
+      </div>
+      
       
       <div data-role="main" class="ui-content">
-        <div id="entrylarge"></div>
+        <div id="entry-detail"></div>
       </div>
+      
+      <div data-role="footer">
+       <h1>All data from <a href="http://www.nativeplantcenter.net/">Native Plant Center</a></h1>
+     </div>
     </div>
+     
+     
+     
      
   </body>
 </html>

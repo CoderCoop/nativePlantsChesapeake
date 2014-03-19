@@ -1,9 +1,16 @@
-$(document).ready(function () {
 
+
+
+$(document).ready(function () {
+   
+        var mydata; // create array to hold result data
+       
 // search form
   $("form").on("submit", function (e) {
-        e.preventDefault(); // supress form submit
+        e.preventDefault(); // suppress form submit
         
+        mydata = new Array(); // initialize with new array
+       
         $('#mylist').empty(); // clear old results
         
         $('#mylist').html('<img src="http://preloaders.net/preloaders/712/Floating%20rays.gif"/>Loading...'); // show loading message
@@ -20,7 +27,7 @@ $(document).ready(function () {
       
         $('#mylist').empty(); // clear loading message
       
-          var mydata = new Array();
+          
           
           $.each(data.query.results.div, function (i, div) {
           
@@ -29,7 +36,8 @@ $(document).ready(function () {
             var entry = new Array();
           
             entry["url"]=div.div[0].a.href; //plant url
-            entry["img"]=div.div[0].a.img.src; //thumbnail image
+            entry["thumb"]=div.div[0].a.img.src; //thumbnail image
+            entry["img"]=entry["thumb"].replace("thumbs/",""); //full size image  
             entry["species"]=div.div[1].a.content; //scientific name
             entry["name"]=div.div[2].p; //common name  
             entry["commonNames"]=div.div[3].div.div[1].p.content; // all common names
@@ -41,23 +49,28 @@ $(document).ready(function () {
             
             
             // extract numeric plant id from url
-            plantid = "plant"+entry["url"].split("/").pop(); 
+            plantid = entry["url"].split("/").pop(); 
  
-            mydata.push(entry);
+            mydata[plantid]=entry;
             
             //create li
             $listitem = $('<li>'); 
             
             //create link
-            $itemlink = $('<a>').attr({"href":"#"+plantid,"class":"search-result"}); 
+            $itemlink = $('<a>').attr({
+              "href":"#details-page",
+              "class":"search-result",
+              "id":plantid,
+              "data-transition":"slide"
+            }); 
             
-            //create thumbnail
-            $( "<img>").attr( "src", entry["img"] ).appendTo( $itemlink );
+            //create thumbnail image
+            $( "<img>").attr( "src", entry["thumb"] ).appendTo( $itemlink );
             
-            // create element with name
+            // create html element with name
             $name = $('<h3>', {text:entry["name"]}).appendTo( $itemlink ); 
 
-            // create element with species name
+            // create html element with species name
             $species = $('<p>', {text:entry["species"]}).appendTo( $itemlink );
               
             // append link to list item
@@ -76,10 +89,67 @@ $(document).ready(function () {
   });
 
   $(document).on('click', 'a.search-result', function() {
-    alert("clicked on: " + $(this).attr('href'));
+  
+    $('#entry-detail').empty(); // clear old results
+    $('#myPopup').empty(); // clear old results
+  
+    var myplant = $(this).attr('id'); //current plant id
     
+    console.log(myplant);
+    
+    $('#entry-detail').append($('<h3>').text(mydata[myplant].name));
+    
+    // create image popup link
+    $imagelink= $('<a>').attr({
+      "href":"#myPopup"+myplant,
+      "data-rel":"popup",
+      "data-position-to":"window"
+    }); 
+    
+    // add image inside popup link
+    $imagelink.append($('<img>').attr({
+      "src":mydata[myplant].img ,
+      "class":"bigimage"
+    }));
+    
+    // popup link
+    $('#entry-detail').append($imagelink);
+    
+    // create div to hold popup image
+    $popupdiv = $('<div>').attr({
+      "data-role":"popup",
+      "id":"myPopup"+myplant,
+      "class":"photopopup",
+    });
+    
+    $popupdiv.append($('<img>').attr({
+      "src": mydata[myplant].img,
+    
+    }));
+    
+    $('#entry-detail').append($popupdiv);
+    
+    // call popup function
+    $( "#myPopup"+myplant ).popup();
+
   });
   
+  $( document ).on( "pagecreate", function() {
+     // console.log("foo");
+      $( ".photopopup" ).on({
+          popupbeforeposition: function() {
+              var maxHeight = $( window ).height() - 60 + "px";
+              $( ".photopopup img" ).css( "max-height", maxHeight );
+          }
+      });
+  });
+
   
   
 });
+
+
+
+
+
+
