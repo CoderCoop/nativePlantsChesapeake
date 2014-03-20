@@ -117,13 +117,24 @@ $(document).ready(function () {
     // add image and link to trigger popup
     $('#entry-detail').append($imagelink);
     
+    
+    
+    
     // create div to hold popup image
     $popupdiv = $('<div>').attr({
       "data-role":"popup",
       "id":"myPopup"+myplant,
       "class":"photopopup",
+      "data-overlay-theme":"b"
     });
     
+    //add close button to popup div
+    $popupdiv.append($('<a>').attr({
+      "href":"#",
+      "data-rel":"back",
+      "class":"ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right",
+    }));
+
     // add popup image to div
     $popupdiv.append($('<img>').attr({
       "src": mydata[myplant].img,
@@ -135,19 +146,16 @@ $(document).ready(function () {
     // call popup function because dom has been modified
     $( "#myPopup"+myplant ).popup();
 
-  });
-
-// popup image scaling http://demos.jquerymobile.com/1.4.0/popup-image-scaling/  
-  $( document ).on( "pagecreate", function() {
-      $( ".photopopup" ).on({
+// popup image scaling http://demos.jquerymobile.com/1.4.0/popup-image-scaling/     
+          $( ".photopopup" ).on({
           popupbeforeposition: function() {
               var maxHeight = $( window ).height() - 60 + "px";
               $( ".photopopup img" ).css( "height", maxHeight );
+              //console.log("maxHeight: "+maxHeight);
           }
       });
-  });
 
-  
+  });
   
 });
 
