@@ -1,7 +1,4 @@
-
-
-
-$(document).ready(function () {
+$(document).ready(function () {   
    
         var mydata; // create array to hold result data
        
@@ -13,7 +10,16 @@ $(document).ready(function () {
        
         $('#mylist').empty(); // clear old results
         
-        $('#mylist').html('<img src="http://preloaders.net/preloaders/712/Floating%20rays.gif"/>Loading...'); // show loading message
+        $.mobile.loading( 'show', {
+          text: "Loading...",
+          textVisible: true,
+          theme: "b",
+        });
+
+        
+        
+        
+       // $('#mylist').html('<img src="http://preloaders.net/preloaders/712/Floating%20rays.gif"/>Loading...'); // show loading message
         
         // console.clear();
         var input = $('#query').val();
@@ -51,6 +57,12 @@ $(document).ready(function () {
             // extract numeric plant id from url
             plantid = entry["url"].split("/").pop(); 
  
+ 
+            // remove some text from common names
+            entry["commonNames"]=entry["commonNames"].replace(":  ","");
+            entry["commonNames"]=entry["commonNames"].replace(": ","");
+ 
+            // save entry into mydata array
             mydata[plantid]=entry;
             
             //create li
@@ -67,11 +79,18 @@ $(document).ready(function () {
             //create thumbnail image
             $( "<img>").attr( "src", entry["thumb"] ).appendTo( $itemlink );
             
-            // create html element with name
-            $name = $('<h3>', {text:entry["name"]}).appendTo( $itemlink ); 
-
             // create html element with species name
-            $species = $('<p>', {text:entry["species"]}).appendTo( $itemlink );
+            $('<h3>', {text:entry["species"]}).appendTo( $itemlink ); 
+
+            // create html element with name
+            $('<p>', {text:entry["name"]+entry["commonNames"]}).appendTo( $itemlink );
+            
+            // create html element plant type
+            $('<p>', {
+              text:"Plant Type"+entry["plantTypes"],
+              style:"font-style:italic"
+            }).appendTo( $itemlink );
+
               
             // append link to list item
             $itemlink.appendTo($listitem);   
@@ -82,12 +101,15 @@ $(document).ready(function () {
             // trigger jquery mobile with newly built list
             $("#mylist").listview("refresh");
             
-            
+            $.mobile.loading( 'hide');
+
             
       });
     });
   });
 
+
+// results detail
   $(document).on('click', 'a.search-result', function() {
   
     $('#entry-detail').empty(); // clear old results
@@ -99,7 +121,7 @@ $(document).ready(function () {
   
     var myplant = $(this).attr('id'); //current plant id
  
-    $('#entry-detail').append($('<h3>').text(mydata[myplant].name)); // display plant name
+    $('#entry-detail').append($('<h3>').text(mydata[myplant].species)); // display plant species name
     
     // create popup link
     $imagelink= $('<a>').attr({
