@@ -58,10 +58,21 @@ $(document).ready(function () {
             plantid = entry["url"].split("/").pop(); 
  
  
-            // remove some text from common names
-            entry["commonNames"]=entry["commonNames"].replace(":  ","");
-            entry["commonNames"]=entry["commonNames"].replace(": ","");
- 
+            // remove leading punctuation from common names
+     //       entry["commonNames"]=entry["commonNames"].replace(":  ","");
+       //     entry["commonNames"]=entry["commonNames"].replace(": ","");
+            
+            // remove leading punctuation from plant type
+     //       entry["plantTypes"]=entry["plantTypes"].replace(":","");
+            
+            
+            //remove leading punctuation
+            for (var x in entry) {
+              entry[x] = entry[x].replace(":  ","");
+              entry[x] = entry[x].replace(": ","");
+            }
+           
+
             // save entry into mydata array
             mydata[plantid]=entry;
             
@@ -87,7 +98,7 @@ $(document).ready(function () {
             
             // create html element plant type
             $('<p>', {
-              text:"Plant Type"+entry["plantTypes"],
+              text:"Plant Type: "+entry["plantTypes"],
               style:"font-style:italic"
             }).appendTo( $itemlink );
 
@@ -112,7 +123,11 @@ $(document).ready(function () {
 // results detail
   $(document).on('click', 'a.search-result', function() {
   
-    $('#entry-detail').empty(); // clear old results
+//    $('#entry-detail').empty(); // clear old results
+
+    $('#entry-detail-a').empty(); // clear old results
+    $('#entry-detail-b').empty(); // clear old results
+
     
     //remove old popup divs
     $('.ui-popup-container').remove(); 
@@ -121,7 +136,7 @@ $(document).ready(function () {
   
     var myplant = $(this).attr('id'); //current plant id
  
-    $('#entry-detail').append($('<h3>').text(mydata[myplant].species)); // display plant species name
+    $('#entry-detail>h3').text(mydata[myplant].species); // display plant species name
     
     // create popup link
     $imagelink= $('<a>').attr({
@@ -137,9 +152,7 @@ $(document).ready(function () {
     }));
     
     // add image and link to trigger popup
-    $('#entry-detail').append($imagelink);
-    
-    
+    $('#entry-detail-a').append($imagelink);
     
     
     // create div to hold popup image
@@ -163,19 +176,32 @@ $(document).ready(function () {
     }));
     
     // add the popup div
-    $('#entry-detail').append($popupdiv);
+    $('#entry-detail-a').append($popupdiv);
     
     // call popup function because dom has been modified
     $( "#myPopup"+myplant ).popup();
 
 // popup image scaling http://demos.jquerymobile.com/1.4.0/popup-image-scaling/     
-          $( ".photopopup" ).on({
-          popupbeforeposition: function() {
-              var maxHeight = $( window ).height() - 60 + "px";
-              $( ".photopopup img" ).css( "height", maxHeight );
-              //console.log("maxHeight: "+maxHeight);
-          }
-      });
+    $( ".photopopup" ).on({
+      popupbeforeposition: function() {
+        var maxHeight = $( window ).height() - 60 + "px";
+        $( ".photopopup img" ).css( "height", maxHeight );
+        //console.log("maxHeight: "+maxHeight);
+      }
+    });
+    
+    
+    // entry details plant info
+    $('#entry-detail-b').append(
+      $('<div>').html('Common Names: <span style="font-weight:bold;">'+mydata[myplant].name+mydata[myplant].commonNames+"</div>"),
+      $('<div>').html('Plant Type: <span style="font-weight:bold;">'+mydata[myplant].plantTypes+"</div>"),
+      $('<div>').html('Sun Exposure: <span style="font-weight:bold;">'+mydata[myplant].sunExposure+"</div>"),
+      $('<div>').html('Soil Texture: <span style="font-weight:bold;">'+mydata[myplant].soilTexture+"</div>"),
+      $('<div>').html('Soil Moisture: <span style="font-weight:bold;">'+mydata[myplant].soilMoisture+"</div>"),
+      $('<div>').html('Region: <span style="font-weight:bold;">'+mydata[myplant].region+"</div>")
+    );
+    
+    
 
   });
   
