@@ -16,14 +16,9 @@ $(document).ready(function () {
           theme: "b",
         });
 
-        
-        
-        
-       // $('#mylist').html('<img src="http://preloaders.net/preloaders/712/Floating%20rays.gif"/>Loading...'); // show loading message
-        
-        // console.clear();
         var input = $('#query').val();
         var api = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.nativeplantcenter.net%2F%3Fq%3Ddatabase%26count%3D-1%26keyword%3D" + input + "%22%20and%20xpath%3D'%2F%2Fdiv%5Bcontains(%40class%2C%22database_entry%20matrix_entry%22)%5D'&format=json&diagnostics=true&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=?";
+
         $.getJSON(api, {
             //    tags: "mount rainier",
             //    tagmode: "any",
@@ -31,17 +26,27 @@ $(document).ready(function () {
         })
         .done(function (data) {
       
-        $('#mylist').empty(); // clear loading message
-      
+          // handle case of 0 results found
+          if (!data.query.results) {
+            $('#mylist').html("<h3>No results found.</h3>");
+            $.mobile.loading( 'hide');
+            return;
+          }
+        
+            
+          // handle case of only 1 result returned     
+          if (typeof data.query.results.div[0] === 'undefined') {
           
+            data.query.results.div = new Array(data.query.results.div);
           
+          }
+          
+          //iterate through each result          
           $.each(data.query.results.div, function (i, div) {
-          
-          //console.log(div);
-          
+         
             var entry = new Array();
           
-            entry["url"]=div.div[0].a.href; //plant url
+            entry["url"]=div.div[3].div.div[0].a.href; //plant url
             entry["thumb"]=div.div[0].a.img.src; //thumbnail image
             entry["img"]=entry["thumb"].replace("thumbs/",""); //full size image  
             entry["species"]=div.div[1].a.content; //scientific name
@@ -56,15 +61,6 @@ $(document).ready(function () {
             
             // extract numeric plant id from url
             plantid = entry["url"].split("/").pop(); 
- 
- 
-            // remove leading punctuation from common names
-     //       entry["commonNames"]=entry["commonNames"].replace(":  ","");
-       //     entry["commonNames"]=entry["commonNames"].replace(": ","");
-            
-            // remove leading punctuation from plant type
-     //       entry["plantTypes"]=entry["plantTypes"].replace(":","");
-            
             
             //remove leading punctuation
             for (var x in entry) {
@@ -112,8 +108,8 @@ $(document).ready(function () {
             // trigger jquery mobile with newly built list
             $("#mylist").listview("refresh");
             
+            // remove loading message
             $.mobile.loading( 'hide');
-
             
       });
     });
@@ -198,7 +194,8 @@ $(document).ready(function () {
       $('<div>').html('Sun Exposure: <span style="font-weight:bold;">'+mydata[myplant].sunExposure+"</div>"),
       $('<div>').html('Soil Texture: <span style="font-weight:bold;">'+mydata[myplant].soilTexture+"</div>"),
       $('<div>').html('Soil Moisture: <span style="font-weight:bold;">'+mydata[myplant].soilMoisture+"</div>"),
-      $('<div>').html('Region: <span style="font-weight:bold;">'+mydata[myplant].region+"</div>")
+      $('<div>').html('Region: <span style="font-weight:bold;">'+mydata[myplant].region+"</div>"),
+      $('<div>').html('<a href="'+mydata[myplant].url+'">Learn More</a>')
     );
     
     
