@@ -119,16 +119,13 @@ $(document).ready(function () {
 // results detail
   $(document).on('click', 'a.search-result', function() {
   
-//    $('#entry-detail').empty(); // clear old results
-
-    $('#entry-detail-a').empty(); // clear old results
-    $('#entry-detail-b').empty(); // clear old results
-
+    // clear old results
+    $('#entry-detail-a').empty();
+    $('#entry-detail-b').empty();
     
     //remove old popup divs
     $('.ui-popup-container').remove(); 
     $('.ui-popup-screen').remove(); 
-    
   
     var myplant = $(this).attr('id'); //current plant id
  
@@ -195,7 +192,7 @@ $(document).ready(function () {
       $('<div>').html('Soil Texture: <span style="font-weight:bold;">'+mydata[myplant].soilTexture+"</div>"),
       $('<div>').html('Soil Moisture: <span style="font-weight:bold;">'+mydata[myplant].soilMoisture+"</div>"),
       $('<div>').html('Region: <span style="font-weight:bold;">'+mydata[myplant].region+"</div>"),
-      $('<div>').html('<a href="'+mydata[myplant].url+'">Learn More</a>')
+      $('<div>').html('<a href="'+mydata[myplant].url+'" class="ui-btn">Learn More</a>')
     );
     
     
