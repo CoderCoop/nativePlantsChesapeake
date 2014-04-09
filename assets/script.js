@@ -171,11 +171,11 @@ $(document).ready(function () {
     // call popup function because dom has been modified
     $( "#myPopup"+myplant ).popup();
 
-// popup image scaling http://demos.jquerymobile.com/1.4.0/popup-image-scaling/     
+// popup image scaling http://demos.jquerymobile.com/1.4.2/popup-image-scaling/    
     $( ".photopopup" ).on({
       popupbeforeposition: function() {
         var maxHeight = $( window ).height() - 60 + "px";
-        $( ".photopopup img" ).css( "height", maxHeight );
+        $( ".photopopup img" ).css( "max-height", maxHeight );
         //console.log("maxHeight: "+maxHeight);
       }
     });
