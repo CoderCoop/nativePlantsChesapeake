@@ -1,4 +1,4 @@
-package net.nativeplantcenter.android;
+package org.codercoop.nativeplants;
 
 import android.app.Activity;
 import android.os.Bundle;
