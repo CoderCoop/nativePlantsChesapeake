@@ -1,7 +1,8 @@
-div.ui-btn {
+div.search-button-block>div.ui-input-btn {
   height:3.25em;
   width:4em;
 }
+
 
 div.ui-input-search input {
 

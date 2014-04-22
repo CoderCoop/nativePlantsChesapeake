@@ -113,7 +113,7 @@ $(document).ready(function () {
   });
 
 
-// results detail
+  // results detail
   $(document).on('click', 'a.search-result', function() {
   
     // clear old results
@@ -188,8 +188,13 @@ $(document).ready(function () {
       $('<div>').html('Soil Texture: <span>'+mydata[myplant].soilTexture+"</div>"),
       $('<div>').html('Soil Moisture: <span>'+mydata[myplant].soilMoisture+"</div>"),
       $('<div>').html('Region: <span>'+mydata[myplant].region+"</div>"),
-      $('<div>').html('<a href="'+mydata[myplant].url+'" class="ui-btn">Learn More</a>')
+//      $('<div id="learn-more-btn">').html('<a href="'+mydata[myplant].url+'" class="ui-btn" data-icon="info">Learn More</a>')
+      $('<div>').html('<a id="learn-more" href="'+mydata[myplant].url+'">Learn More</a>')
+
+//      $('<div id="learn-more-btn">').html('Learn More')
+
     );
+    $("#learn-more").button({ icon: "star" });
   });
 });
 
