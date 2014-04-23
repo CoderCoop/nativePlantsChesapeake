@@ -188,13 +188,8 @@ $(document).ready(function () {
       $('<div>').html('Soil Texture: <span>'+mydata[myplant].soilTexture+"</div>"),
       $('<div>').html('Soil Moisture: <span>'+mydata[myplant].soilMoisture+"</div>"),
       $('<div>').html('Region: <span>'+mydata[myplant].region+"</div>"),
-//      $('<div id="learn-more-btn">').html('<a href="'+mydata[myplant].url+'" class="ui-btn" data-icon="info">Learn More</a>')
-      $('<div>').html('<a id="learn-more" href="'+mydata[myplant].url+'">Learn More</a>')
-
-//      $('<div id="learn-more-btn">').html('Learn More')
-
+      $('<div>').html('<a id="learn-more" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-right ui-icon-arrow-u-r" href="'+mydata[myplant].url+'">Learn More</a>')
     );
-    $("#learn-more").button({ icon: "star" });
   });
 });
 
