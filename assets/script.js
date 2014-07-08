@@ -17,14 +17,16 @@ $(document).ready(function () {
       theme: "b",
     });
 
-    var input = $('#query').val();
-    var api = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.nativeplantcenter.net%2F%3Fq%3Ddatabase%26count%3D-1%26keyword%3D" + input + "%22%20and%20xpath%3D'%2F%2Fdiv%5Bcontains(%40class%2C%22database_entry%20matrix_entry%22)%5D'&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=?";
+    var input = $('#query').val(); // get search form user input
+    var api = "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fwww.nativeplantcenter.net%2F%3Fq%3Ddatabase%26count%3D-1%26keyword%3D" + input + "%22%20and%20xpath%3D'%2F%2Fdiv%5Bcontains(%40class%2C%22database_entry%20matrix_entry%22)%5D'&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=?"; // build yql & nativeplantcenter query
 
     $.getJSON(api, {
-            format: "json"
+      format: "json"
+      // run jquery function
     })
     
     .done(function (data) {
+    // runs when $.getJSON() completes 
   
       // handle case of 0 results found
       if (!data.query.results) {
@@ -113,20 +115,22 @@ $(document).ready(function () {
   });
 
 
-  // results detail
+  // catch click on search results to show detailed page
   $(document).on('click', 'a.search-result', function() {
   
     // clear old results
     $('#entry-detail-a').empty();
     $('#entry-detail-b').empty();
     
-    //remove old popup divs
+    // remove old popup divs
     $('.ui-popup-container').remove(); 
     $('.ui-popup-screen').remove(); 
   
-    var myplant = $(this).attr('id'); //current plant id
+    // get current plant id from <a id="">
+    var myplant = $(this).attr('id'); 
  
-    $('#entry-detail>h3').text(mydata[myplant].species); // display plant species name
+    // display plant species name
+    $('#entry-detail>h3').text(mydata[myplant].species); 
     
     // create popup link
     $imagelink= $('<a>').attr({
@@ -171,7 +175,7 @@ $(document).ready(function () {
     // call popup function because dom has been modified
     $( "#myPopup"+myplant ).popup();
 
-// popup image scaling http://demos.jquerymobile.com/1.4.2/popup-image-scaling/    
+    // popup image scaling http://demos.jquerymobile.com/1.4.2/popup-image-scaling/    
     $( ".photopopup" ).on({
       popupbeforeposition: function() {
         var maxHeight = $( window ).height() - 60 + "px";
@@ -190,6 +194,18 @@ $(document).ready(function () {
       $('<div>').html('Region: <span>'+mydata[myplant].region+"</div>"),
       $('<div>').html('<a id="learn-more" class="ui-btn ui-corner-all ui-shadow ui-btn-icon-right ui-icon-arrow-u-r" href="'+mydata[myplant].url+'">Learn More</a>')
     );
-  });
-});
+  }); // close function handler for search results detail
+
+  // catch click on sample search
+  $(document).on('click', 'a.sample-search', function() {
+    // get sample search from <a href="">
+    var ssearch = $(this).text();
+    console.log(ssearch);
+    $("#query").val(ssearch);
+    $("#query").submit();
+  }
+);
+
+
+}); //close document.ready function
 
