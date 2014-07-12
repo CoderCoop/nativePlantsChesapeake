@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" debug="true">
+<html lang="en">
   <head>
     
     <meta charset="utf-8">
@@ -16,26 +16,24 @@
   </head>
   <body>
   
-  <!-- jqm page for search and search results -->
-  <div data-role="page" id="search-page">
-  
-    <div data-role="header">
+    <!-- jqm page for search -->
+    <div data-role="page" id="search-page">
+    
       <!-- search form -->
-      <form action="">
-        <fieldset class="ui-grid-a" style="width:100%;">
-          <div class="ui-block-a search-input-block" >
-            <input type="search" name="query" id="query" autofocus="autofocus" placeholder="Search for plants" data-inline="true">
-          </div>
-          <div class="ui-block-b search-button-block" >
-            <input type="submit" data-role="button" data-icon="search" data-iconpos="notext" style="height:100%;" >
-          </div>
-        </fieldset>
-      </form>
+      <div data-role="header" data-id="search">
+        <form action="#search-results" id="forma">
+          <fieldset class="ui-grid-a" style="width:100%;">
+            <div class="ui-block-a search-input-block" >
+              <input type="search" name="querya" id="querya" autofocus="autofocus" placeholder="Search for plants" data-inline="true">
+            </div>
+            <div class="ui-block-b search-button-block" >
+              <input type="submit" data-role="button" data-icon="search" data-iconpos="notext" style="height:100%;" >
+            </div>
+          </fieldset>
+        </form>
+      </div>
 
-    </div>
-
-    <div data-role="main" class="ui-content"> 
-      <ul data-role="listview" data-inset="true" id="mylist">
+      <div data-role="main" class="ui-content"> 
         <h2>Enter your search above to find native plants of the Chesapeake Bay Watershed.</h2>
         <div>This app is not endorsed by <a href="http://www.nativeplantcenter.net/">Native Plant Center</a> and may contain errors.</div>
         <h3>Sample Searches</h3>
@@ -49,53 +47,75 @@
           <a href="#" class="sample-search ui-btn ui-corner-all ui-btn-inline ui-shadow">Foamflower</a>
           <a href="#" class="sample-search ui-btn ui-corner-all ui-btn-inline ui-shadow">Asclepias</a>
         </div>
+      </div>
+        
+      <div data-role="footer">
+       <h1>Data and images from <a href="http://www.nativeplantcenter.net/">Native Plant Center</a></h1>
+      </div>
+    <!-- end jqm page for search -->      
+    </div>
 
-      </ul>
+
+    <!-- jqm page for search results -->
+    <div data-role="page" id="search-results">
+      <!-- search form -->
+      <div data-role="header" data-id="search">
+        <form action="#search-results" id="formb">
+          <fieldset class="ui-grid-a" style="width:100%;">
+            <div class="ui-block-a search-input-block" >
+              <input type="search" name="queryb" id="queryb" autofocus="autofocus" placeholder="Search for plants" data-inline="true">
+            </div>
+            <div class="ui-block-b search-button-block" >
+              <input type="submit" data-role="button" data-icon="search" data-iconpos="notext" style="height:100%;" >
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+
+      <div data-role="main" class="ui-content"> 
+        <ul data-role="listview" data-inset="true" id="mylist"></ul>
+      </div>
+      <div data-role="footer">
+        <h1>Data and images from <a href="http://www.nativeplantcenter.net/">Native Plant Center</a></h1>
+      </div>
+    <!-- end jqm page for search results -->
     </div>
-      
-    <div data-role="footer">
-     <h1>Data and images from <a href="http://www.nativeplantcenter.net/">Native Plant Center</a></h1>
-    </div>
-    
-    </div>
+
     
     <!-- jqm page for entry detail -->    
     <div data-role="page" id="details-page">
-    
       <div data-role="header">
         <div data-role="navbar">
           <ul>
             <li>
-              <a href="#search-page" data-transition="slide" data-direction="reverse" data-role="button" data-icon="back" >Back to search results</a>
+              <a href="#search-results" data-transition="slide" data-direction="reverse" data-role="button" data-icon="back" >Back to search results</a>
             </li>
           </ul>
         </div>
       </div>
-      
-      
+     
       <div class="ui-content" data-role="main" >
-        <div id="entry-detail"><h3 class="entry-detail-title"></h3></div>
+        <div id="entry-detail">
+          <h3 class="entry-detail-title"></h3>
+        </div>
         
         <div class="ui-grid-a ui-responsive">
-          
           <div class="ui-block-a" id="entry-detail-a">  
             <span></span>
           </div>
-          
           <div class="ui-block-b" id="entry-detail-b">
             <span></span>
           </div>
-        
         </div>
-        
-        
-        
+
       </div>
       
       <div data-role="footer">
         <h1>Data and images from <a href="http://www.nativeplantcenter.net/">Native Plant Center</a></h1>
       </div>
-      
+
+    <!-- end jqm page for entry detail -->          
     </div>
      
   </body>
