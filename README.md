@@ -1,8 +1,10 @@
-nativePlantsChesapeake
+Chesapeake Native Plants for Android
 ======================
 
-Unofficial Android app to access http://www.nativeplantcenter.net/
+Search for native plants of the Chesapeake Bay watershed.
 
-Please note: this app is not endorsed by http://www.nativeplantcenter.net/
+This is an unofficial app using data from http://nativeplantcenter.net/ and is not endorsed by them.
 
 This project is under development and may contain errors.
+
+Source code: https://github.com/CoderCoop/nativePlantsChesapeake
