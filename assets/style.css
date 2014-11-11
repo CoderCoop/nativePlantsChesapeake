@@ -15,70 +15,72 @@ div.ui-input-search {
   margin-left:0.5em !important;
   
 }
-
+#mylist > li.ui-li-has-thumb {
+  max-height: 128px;
+}
 
 .ui-listview h3 {
   white-space:normal !important;
 }
 
-  .ui-li-has-thumb a {
-    min-height:103px !important;
-    padding-left: 145px !important;
-  }
+.ui-li-has-thumb a {
+  min-height:103px !important;
+  padding-left: 145px !important;
+}
+
+.ui-li-has-thumb img {
+  max-height: 128px !important;
+  max-width: 128px !important;
+  box-shadow: 0 0 5px #808080;
+}
   
-  .ui-li-has-thumb img {
-    max-height: 128px !important;
-    max-width: 128px !important;
-    box-shadow: 0 0 5px #808080;
-  }
-  
- img.bigimage {
-   max-width:100%;
-   margin-left: auto;
-   margin-right: auto;
-   margin-bottom: 1em;
-   display:block;
-   border-radius: 5px;
-   box-shadow: 4px 5px 4px #888888;
-   border: 1px solid black !important;
- 
- }
+img.bigimage {
+ max-width:100%;
+ margin-left: auto;
+ margin-right: auto;
+ margin-bottom: 1em;
+ display:block;
+ border-radius: 5px;
+ box-shadow: 4px 5px 4px #888888;
+ border: 1px solid black !important;
+
+}
  
  div.ui-popup {
 /*   max-width:80%;
    max-height:80%;
  */
  }
-  
- div.search-button-block {
-   width:25% !important;
-   width:calc(5em) !important;
-   right:0px;
-   position:absolute;
- }
- 
- div.search-input-block {
-   width:75% !important;
-   width:calc(100% - 5em) !important;
- }
 
- .ui-panel-inner > .ui-listview-inset {
-   margin: 0.5em 0 !important;
- }
- 
- .ui-content {
-   padding: 0 1em !important;
- }
- 
- h3.entry-detail-title {
-   text-align: center;
- }
- div>#entry-detail-b {
-   padding-left:1em;
- }
- #entry-detail-b>div>span {
-   font-weight:bold;
- }
- .ui-popup-screen.in {
- opacity: 0.70 !important;
- }
+div.search-button-block {
+ width:25% !important;
+ width:calc(5em) !important;
+ right:0px;
+ position:absolute;
+}
+
+div.search-input-block {
+ width:75% !important;
+ width:calc(100% - 5em) !important;
+}
+
+.ui-panel-inner > .ui-listview-inset {
+ margin: 0.5em 0 !important;
+}
+
+.ui-content {
+ padding: 0 1em !important;
+}
+
+h3.entry-detail-title {
+ text-align: center;
+}
+div>#entry-detail-b {
+ padding-left:1em;
+}
+#entry-detail-b>div>span {
+ font-weight:bold;
+}
+.ui-popup-screen.in {
+opacity: 0.70 !important;
+}
