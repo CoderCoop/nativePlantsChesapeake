@@ -20,11 +20,9 @@ task symlink(type: Exec, dependsOn: grunt) {
   commandLine 'ln', '-s', 'npc.assets/dist', 'assets'
 }
 symlink.doFirst {
-  commandLine 'rm', 'assets'
+  commandLine 'rm', '-f', 'assets'
 }
 
-task foo(dependsOn: symlink) << {
+task prep(dependsOn: symlink) << {
     println "All ready"
 }
-
-
