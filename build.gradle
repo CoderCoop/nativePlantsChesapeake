@@ -2,21 +2,29 @@ ant.importBuild('build.xml')
 
 
 task git(type: Exec) {
-    workingDir 'assets'
+    workingDir 'npc.assets'
     commandLine 'git', 'pull'
 }
 
-task npm(type: Exec) {
-    workingDir 'assets'
+task npm(type: Exec, dependsOn: git) {
+    workingDir 'npc.assets'
     commandLine 'npm', 'install'
 }
 
-task grunt(type: Exec) {
-    workingDir 'assets'
+task grunt(type: Exec, dependsOn: npm) {
+    workingDir 'npc.assets'
     commandLine 'grunt', 'build'
 }
 
-grunt.dependsOn npm
-npm.dependsOn git
+task symlink(type: Exec, dependsOn: grunt) {
+  commandLine 'ln', '-s', 'npc.assets/dist', 'assets'
+}
+symlink.doFirst {
+  commandLine 'rm', 'assets'
+}
+
+task foo(dependsOn: symlink) << {
+    println "All ready"
+}
 
 
