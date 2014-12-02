@@ -4,3 +4,4 @@ ant.properties
 bin/
 gen/
 .gradle
+assets
