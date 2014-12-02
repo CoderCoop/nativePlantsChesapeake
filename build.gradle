@@ -16,13 +16,10 @@ task grunt(type: Exec, dependsOn: npm) {
     commandLine 'grunt', 'build'
 }
 
-task symlink(type: Exec, dependsOn: grunt) {
-  commandLine 'ln', '-s', 'npc.assets/dist', 'assets'
-}
-symlink.doFirst {
-  commandLine 'rm', '-f', 'assets'
+task createLink(dependsOn: grunt) << {  
+   ant.symlink(resource: "npc.assets/dist", link: "assets")
 }
 
-task prep(dependsOn: symlink) << {
+task prep(dependsOn: createLink) << {
     println "All ready"
 }
